@@ -1,0 +1,41 @@
+🛡️ Skyesports Inventory System: Technical Briefing (V2.1)
+1. Project Goal & Infrastructure
+Objective: A high-performance, broadcast-ready inventory system for managing esports equipment across multiple locations and projects.
+Architecture: Monolithic repository with a Node.js/Express backend and a React/Vite frontend.
+Database: SQLite (better-sqlite3) for simplicity and portable performance.
+Design Language: Professional "Glassmorphism" (Dark Mode) with specific visual branding for Skyesports.
+2. Backend Deep-Dive
+Core Routes & Logic
+Modular API: Routes are segregated into /api/assets, /api/users, /api/employees, /api/upload, and /api/auth.
+Global Search Engine: Uses a unified backend endpoint (/api/search/global) that performs a multi-table SQL LIKE query across assets (names/IDs), serial numbers, and employee names.
+Asset Media Handling: Uses multer for local file storage in /uploads. Supports multiple attachments per asset (Invoices as PDFs, Photos as JPGs).
+Excel Integration: Implemented using the xlsx library to generate dynamic reports directly from the SQL database.
+Database Schema (Extended V2.1)
+assets: Main metadata (id, name, manufacturer, model, category, location, quantity, is_consumable).
+asset_serials: (One-to-Many) Tracks individual unit serial numbers for bulk items.
+asset_media: (One-to-Many) Stores paths and metadata (image vs pdf) for all asset attachments.
+users: Login credentials with enforced roles (admin, assistant, viewer).
+employees: Detailed directory of staff members for equipment assignment.
+audit_log: Tracks every action (CREATE, DELETE, LOGIN) with timestamps and user-IDs.
+3. Frontend Deep-Dive
+Core UI Structure
+App.jsx: Controls the professional horizontal layout. Includes a persistent Sidebar and a Topbar with Global Search and a Profile Dropdown.
+App.css: Built on custom design tokens (--accent: #38bdf8, --bg-primary: #0f1117). Uses @keyframes for smooth entry animations (slide-up, fade-in).
+RBAC Protection: Uses AuthContext to conditionally render UI elements. (e.g., Assistants can delete, Viewers cannot see management buttons).
+Key Components
+AddAssetModal.jsx: The core data-entry engine. Supports camera snapshot logic, multi-file uploads with previews, and dynamic serial number lists.
+Users.jsx: A tabbed management hub allowing seamless switching between System User Management and the Employee Directory.
+4. Tricky Logic & Known Fixes
+Z-Index Management: The topbar is set to z-index: 100 and the Profile Dropdown to z-index: 1000 to ensure interaction over the main content area.
+React Routing: Fixed navigation crashes by ensuring axios and useNavigate are properly scoped within the ProtectedRoute.
+Branding: All text headers force high contrast (white/light gray) to remain visible against the dark radial gradients.
+5. Development Roadmap (Next Steps)
+QR System: Implementing a bulk QR-print engine for asset labels.
+Location Tracking: Building out the interactive map/location management tab.
+Mobile Scanner: Optimizing the scanner page for high-speed "Check-in/Check-out" via mobile camera.
+Source Control:
+
+Master Branch: https://github.com/AshwinMT/skyesports-inventory (Branch: main)
+NOTE
+
+To Continue Work: Just mention this context and reference the implementation_plan.md in the root folder.
