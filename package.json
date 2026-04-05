@@ -1,0 +1,29 @@
+{
+  "name": "skyesports-inventory",
+  "version": "2.0.0",
+  "description": "Skyesports Broadcast Inventory Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.0",
+    "qrcode": "^1.5.3",
+    "sql.js": "^1.11.0",
+    "uuid": "^9.0.0",
+    "xlsx": "^0.18.5",
+    "zod": "^4.3.6"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "author": "Skyesports",
+  "license": "ISC"
+}
